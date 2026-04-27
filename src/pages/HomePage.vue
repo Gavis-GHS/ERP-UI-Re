@@ -56,6 +56,38 @@
       </el-card>
 
       <el-card>
+        <template #header><span class="widget-title">库存金额分布</span></template>
+        <div class="inv-kpi-row">
+          <div class="kpi-item">
+            <div class="kpi-num">{{ DashboardData.inventoryStats.totalAmount }}</div>
+            <div class="kpi-label">总库存金额</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-num" :class="{ green: isMomNegative, accent: !isMomNegative }">{{ DashboardData.inventoryStats.momChange }}</div>
+            <div class="kpi-label">环比变化</div>
+          </div>
+        </div>
+        <div class="inv-chart-row">
+          <div class="chart-body inv-chart-body">
+            <canvas id="inventoryDoughnutChart"></canvas>
+          </div>
+          <div class="inv-legend">
+            <div
+              v-for="(item, idx) in legendItems"
+              :key="item.name"
+              class="inv-legend-item"
+              :class="{ dimmed: item.hidden }"
+              @click="toggleLegend(idx)"
+            >
+              <span class="inv-legend-dot" :style="{ background: item.color }"></span>
+              <span class="inv-legend-name">{{ item.name }}</span>
+              <span class="inv-legend-pct">{{ item.pct }}</span>
+            </div>
+          </div>
+        </div>
+      </el-card>
+
+      <el-card>
         <template #header>
           <span class="widget-title">月度产值</span>
           <span class="widget-badge" style="margin-left:8px;font-size:12px;color:#999;">柱状图</span>
@@ -341,5 +373,54 @@ function initCharts() {
   font-size: 12px;
   color: #999;
   margin-top: 4px;
+}
+
+.inv-kpi-row {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px 0 8px;
+}
+.inv-chart-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.inv-chart-body {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+}
+.inv-legend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.inv-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  user-select: none;
+}
+.inv-legend-item.dimmed {
+  opacity: 0.35;
+}
+.inv-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.inv-legend-name {
+  font-size: 12px;
+  color: #555;
+  flex: 1;
+}
+.inv-legend-pct {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
 }
 </style>
