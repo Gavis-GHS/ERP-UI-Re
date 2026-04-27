@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{ collapsed }">
     <el-menu
       v-if="!collapsed"
       :default-active="activeKey"
