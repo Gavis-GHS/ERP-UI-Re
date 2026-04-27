@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar">
     <el-menu
+      v-if="!collapsed"
       :default-active="activeKey"
       background-color="#1e3a8a"
       text-color="#ffffff"
@@ -41,6 +42,63 @@
         </el-sub-menu>
       </template>
     </el-menu>
+
+    <!-- Minimal mode: icon list + teleported popups -->
+    <div v-else class="sidebar-icons">
+      <div
+        v-for="item in items"
+        :key="item.key"
+        class="icon-wrapper"
+      >
+        <div
+          class="icon-item"
+          :class="{ active: isItemActive(item) }"
+          @click="onIconClick(item)"
+          @mouseenter="onIconEnter(item.key, $event)"
+          @mouseleave="onIconLeave"
+        >
+          <span v-html="Icons[item.icon] || ''"></span>
+        </div>
+
+        <Teleport to="body">
+          <div
+            v-if="item.children && hoveredKey === item.key"
+            class="sidebar-popup"
+            :style="popupStyle"
+            @mouseenter="onPopupEnter"
+            @mouseleave="onPopupLeave"
+          >
+            <div class="popup-header">{{ item.label }}</div>
+            <template v-for="child in item.children" :key="child.key">
+              <div
+                v-if="!child.children"
+                class="popup-item"
+                :class="{ active: activeKey === (child.path || child.key) }"
+                @click="onPopupItemClick(child.path || child.key)"
+              >
+                {{ child.label }}
+              </div>
+              <template v-else>
+                <div class="popup-sub-label">{{ child.label }}</div>
+                <div
+                  v-for="gc in child.children"
+                  :key="gc.key"
+                  class="popup-item popup-sub-item"
+                  :class="{ active: activeKey === (gc.path || gc.key) }"
+                  @click="onPopupItemClick(gc.path || gc.key)"
+                >
+                  {{ gc.label }}
+                </div>
+              </template>
+            </template>
+          </div>
+        </Teleport>
+      </div>
+    </div>
+
+    <div class="sidebar-toggle" @click="emit('toggle-collapse')">
+      <span class="toggle-icon">{{ collapsed ? '»' : '«' }}</span>
+    </div>
   </div>
 </template>
 
