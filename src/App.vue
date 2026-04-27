@@ -3,6 +3,7 @@
     :items="menuItems"
     :active-key="activeMenu"
     :collapsed="isSidebarCollapsed"
+    :logo="logo"
     @menu-click="handleMenuClick"
     @toggle-collapse="isSidebarCollapsed = !isSidebarCollapsed"
   />
