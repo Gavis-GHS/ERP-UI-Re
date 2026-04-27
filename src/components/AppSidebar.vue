@@ -190,6 +190,7 @@ function isItemActive(item) {
   display: flex;
   flex-direction: column;
   background-color: #1e3a8a;
+  transition: width 0.3s ease, min-width 0.3s ease;
 }
 .sidebar .el-menu {
   border-right: none !important;
@@ -236,7 +237,7 @@ function isItemActive(item) {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 40px;
+  height: 56px;
   padding-right: 12px;
   cursor: pointer;
   color: rgba(255,255,255,0.4);
@@ -253,7 +254,9 @@ function isItemActive(item) {
 .toggle-icon-svg {
   display: inline-flex;
   align-items: center;
-  animation: toggle-pop-in 0.3s ease;
+  width: 22px;
+  height: 22px;
+  animation: toggle-pop-in 0.45s ease;
 }
 
 .toggle-icon-item:active .toggle-icon-svg {
@@ -265,7 +268,7 @@ function isItemActive(item) {
 }
 
 @keyframes toggle-pop-in {
-  0% { transform: scale(0.5) rotate(-90deg); opacity: 0; }
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
   100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 </style>
