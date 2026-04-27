@@ -1,5 +1,8 @@
 <template>
   <div class="sidebar" :class="{ collapsed }">
+    <div v-if="!collapsed" class="sidebar-toggle-top" @click="emit('toggle-collapse')">
+      <span v-html="Icons.collapse" class="toggle-icon-svg"></span>
+    </div>
     <el-menu
       v-if="!collapsed"
       :default-active="activeKey"
@@ -45,6 +48,11 @@
 
     <!-- Minimal mode: icon list + teleported popups -->
     <div v-else class="sidebar-icons">
+      <div class="icon-wrapper">
+        <div class="icon-item toggle-icon-item" @click="emit('toggle-collapse')">
+          <span v-html="Icons.expand" class="toggle-icon-svg"></span>
+        </div>
+      </div>
       <div
         v-for="item in items"
         :key="item.key"
@@ -96,9 +104,6 @@
       </div>
     </div>
 
-    <div class="sidebar-toggle" @click="emit('toggle-collapse')">
-      <span class="toggle-icon">{{ collapsed ? '»' : '«' }}</span>
-    </div>
   </div>
 </template>
 
@@ -185,6 +190,7 @@ function isItemActive(item) {
   display: flex;
   flex-direction: column;
   background-color: #1e3a8a;
+  transition: width 0.3s ease, min-width 0.3s ease;
 }
 .sidebar .el-menu {
   border-right: none !important;
@@ -203,7 +209,7 @@ function isItemActive(item) {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 4px;
+  padding-top: 0;
 }
 
 .icon-wrapper {
@@ -214,7 +220,7 @@ function isItemActive(item) {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  height: 56px;
   cursor: pointer;
   color: rgba(255,255,255,0.7);
   transition: color 0.2s, background 0.2s;
@@ -226,26 +232,44 @@ function isItemActive(item) {
   background: rgba(255,255,255,0.08);
 }
 
-/* Toggle button */
-.sidebar-toggle {
+/* Toggle button — full-width mode (top) */
+.sidebar-toggle-top {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 40px;
+  justify-content: flex-end;
+  height: 56px;
+  padding-right: 12px;
   cursor: pointer;
   color: rgba(255,255,255,0.4);
   transition: color 0.2s;
-  border-top: 1px solid rgba(255,255,255,0.06);
   flex-shrink: 0;
   user-select: none;
 }
 
-.sidebar-toggle:hover {
+.sidebar-toggle-top:hover {
   color: rgba(255,255,255,0.8);
 }
 
-.toggle-icon {
-  font-size: 16px;
+/* Toggle icon animation */
+.toggle-icon-svg {
+  display: inline-flex;
+  align-items: center;
+  width: 22px;
+  height: 22px;
+  animation: toggle-pop-in 0.45s ease;
+}
+
+.toggle-icon-item:active .toggle-icon-svg {
+  transform: scale(0.85);
+}
+
+.sidebar-toggle-top:active .toggle-icon-svg {
+  transform: scale(0.85);
+}
+
+@keyframes toggle-pop-in {
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 </style>
 
