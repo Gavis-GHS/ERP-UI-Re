@@ -2,7 +2,9 @@
   <app-sidebar
     :items="menuItems"
     :active-key="activeMenu"
+    :collapsed="isSidebarCollapsed"
     @menu-click="handleMenuClick"
+    @toggle-collapse="isSidebarCollapsed = !isSidebarCollapsed"
   />
   <div class="right-container">
     <AppTopNav
@@ -37,6 +39,7 @@ const activeMenu = ref('/home')
 const navItems = ref([])
 const logo = ref(TopNavData.logo)
 const userName = ref(TopNavData.userName)
+const isSidebarCollapsed = ref(false)
 const openedTabs = ref([
   { path: '/home', label: '首页', closable: false }
 ])
