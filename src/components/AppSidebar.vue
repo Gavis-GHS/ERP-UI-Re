@@ -53,8 +53,7 @@ import logoImg from '@/assets/logo.png'
 const props = defineProps({
   items: { type: Array, required: true },
   activeKey: { type: String, default: '/home' },
-  collapsed: { type: Boolean, default: false },
-  logo: { type: String, default: '' }
+  collapsed: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['menu-click', 'toggle-collapse'])
