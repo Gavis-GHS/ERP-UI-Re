@@ -144,9 +144,6 @@ function initInventoryChart() {
     hidden: false
   }))
 
-  let centerName = maxCat.name
-  let centerPct = ((maxCat.value / total) * 100).toFixed(1) + '%'
-
   const chart = new Chart(canvas, {
     type: 'doughnut',
     data: {
@@ -176,29 +173,27 @@ function initInventoryChart() {
       },
       onHover(_event, elements) {
         canvas.style.cursor = elements.length ? 'pointer' : 'default'
-        if (elements.length) {
-          const c = cats[elements[0].index]
-          centerName = c.name
-          centerPct = ((c.value / total) * 100).toFixed(1) + '%'
-        } else {
-          centerName = maxCat.name
-          centerPct = ((maxCat.value / total) * 100).toFixed(1) + '%'
+        const newName = elements.length ? cats[elements[0].index].name : maxCat.name
+        const newVal = elements.length ? cats[elements[0].index].value : maxCat.value
+        const newPct = ((newVal / total) * 100).toFixed(1) + '%'
+        if (chart._centerText !== newName || chart._centerSubText !== newPct) {
+          chart._centerText = newName
+          chart._centerSubText = newPct
+          chart.update('none')
         }
-        chart._centerText = centerName
-        chart._centerSubText = centerPct
-        chart.draw()
       }
     },
     plugins: [centerTextPlugin]
   })
 
-  chart._centerText = centerName
-  chart._centerSubText = centerPct
+  chart._centerText = maxCat.name
+  chart._centerSubText = ((maxCat.value / total) * 100).toFixed(1) + '%'
 
   return chart
 }
 
 function toggleLegend(idx) {
+  if (!inventoryChart) return
   const item = legendItems.value[idx]
   item.hidden = !item.hidden
 
