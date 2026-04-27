@@ -2,7 +2,7 @@
   <div class="sidebar" :class="{ collapsed }">
     <div class="sidebar-toggle-top" @click="emit('toggle-collapse')">
       <span v-html="collapsed ? Icons.expand : Icons.collapse" class="toggle-icon-svg"></span>
-      <span class="sidebar-logo">{{ logo }}</span>
+      <img :src="logoImg" class="sidebar-logo" />
     </div>
     <div class="menu-wrapper">
       <el-menu
@@ -48,6 +48,7 @@
 
 <script setup>
 import { Icons } from '@/data/icons'
+import logoImg from '@/assets/logo.png'
 
 const props = defineProps({
   items: { type: Array, required: true },
@@ -118,10 +119,7 @@ const emit = defineEmits(['menu-click', 'toggle-collapse'])
 
 .sidebar-logo {
   margin-left: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.9);
-  white-space: nowrap;
+  height: 32px;
   transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
