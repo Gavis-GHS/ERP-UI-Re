@@ -253,7 +253,7 @@ function isItemActive(item) {
 .toggle-icon-svg {
   display: inline-flex;
   align-items: center;
-  transition: transform 0.25s ease;
+  animation: toggle-pop-in 0.3s ease;
 }
 
 .toggle-icon-item:active .toggle-icon-svg {
@@ -262,11 +262,6 @@ function isItemActive(item) {
 
 .sidebar-toggle-top:active .toggle-icon-svg {
   transform: scale(0.85);
-}
-
-/* Entrance animation for toggle icon on mode switch */
-.toggle-icon-svg {
-  animation: toggle-pop-in 0.3s ease;
 }
 
 @keyframes toggle-pop-in {
