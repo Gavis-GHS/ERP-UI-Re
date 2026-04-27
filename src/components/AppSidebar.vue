@@ -3,43 +3,45 @@
     <div class="sidebar-toggle-top" @click="emit('toggle-collapse')">
       <span v-html="collapsed ? Icons.expand : Icons.collapse" class="toggle-icon-svg"></span>
     </div>
-    <el-menu
-      :default-active="activeKey"
-      background-color="#1e3a8a"
-      text-color="#ffffff"
-      active-text-color="#409eff"
-      @select="(index) => emit('menu-click', index)"
-    >
-      <template v-for="item in items" :key="item.key">
-        <el-menu-item v-if="!item.children" :index="item.path || item.key">
-          <span v-html="Icons[item.icon] || ''" style="margin-right:8px;display:inline-flex;align-items:center;"></span>
-          <span>{{ item.label }}</span>
-        </el-menu-item>
-        <el-sub-menu v-else :index="item.key">
-          <template #title>
+    <div class="menu-wrapper">
+      <el-menu
+        :default-active="activeKey"
+        background-color="#1e3a8a"
+        text-color="#ffffff"
+        active-text-color="#409eff"
+        @select="(index) => emit('menu-click', index)"
+      >
+        <template v-for="item in items" :key="item.key">
+          <el-menu-item v-if="!item.children" :index="item.path || item.key">
             <span v-html="Icons[item.icon] || ''" style="margin-right:8px;display:inline-flex;align-items:center;"></span>
             <span>{{ item.label }}</span>
-          </template>
-          <template v-for="child in item.children" :key="child.key">
-            <el-menu-item v-if="!child.children" :index="child.path || child.key">
-              <span>{{ child.label }}</span>
-            </el-menu-item>
-            <el-sub-menu v-else :index="child.key">
-              <template #title>
+          </el-menu-item>
+          <el-sub-menu v-else :index="item.key">
+            <template #title>
+              <span v-html="Icons[item.icon] || ''" style="margin-right:8px;display:inline-flex;align-items:center;"></span>
+              <span>{{ item.label }}</span>
+            </template>
+            <template v-for="child in item.children" :key="child.key">
+              <el-menu-item v-if="!child.children" :index="child.path || child.key">
                 <span>{{ child.label }}</span>
-              </template>
-              <el-menu-item
-                v-for="grandchild in child.children"
-                :key="grandchild.key"
-                :index="grandchild.path || grandchild.key"
-              >
-                <span>{{ grandchild.label }}</span>
               </el-menu-item>
-            </el-sub-menu>
-          </template>
-        </el-sub-menu>
-      </template>
-    </el-menu>
+              <el-sub-menu v-else :index="child.key">
+                <template #title>
+                  <span>{{ child.label }}</span>
+                </template>
+                <el-menu-item
+                  v-for="grandchild in child.children"
+                  :key="grandchild.key"
+                  :index="grandchild.path || grandchild.key"
+                >
+                  <span>{{ grandchild.label }}</span>
+                </el-menu-item>
+              </el-sub-menu>
+            </template>
+          </el-sub-menu>
+        </template>
+      </el-menu>
+    </div>
   </div>
 </template>
 
@@ -74,9 +76,14 @@ const emit = defineEmits(['menu-click', 'toggle-collapse'])
   min-width: 60px;
 }
 
-.sidebar .el-menu {
-  border-right: none !important;
+.menu-wrapper {
   flex: 1;
+  width: 240px;
+}
+
+.menu-wrapper .el-menu {
+  border-right: none !important;
+  height: 100%;
 }
 
 .sidebar-toggle-top {
