@@ -45,14 +45,66 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { Icons } from '@/data/icons'
 
-defineProps({
+const props = defineProps({
   items: { type: Array, required: true },
-  activeKey: { type: String, default: '/home' }
+  activeKey: { type: String, default: '/home' },
+  collapsed: { type: Boolean, default: false }
 })
 
-const emit = defineEmits(['menu-click'])
+const emit = defineEmits(['menu-click', 'toggle-collapse'])
+
+const hoveredKey = ref(null)
+const popupStyle = ref({})
+let hideTimer = null
+
+function onIconEnter(key, event) {
+  clearTimeout(hideTimer)
+  const rect = event.currentTarget.getBoundingClientRect()
+  popupStyle.value = {
+    top: rect.top + 'px',
+    left: rect.right + 'px'
+  }
+  hoveredKey.value = key
+}
+
+function onIconLeave() {
+  hideTimer = setTimeout(() => {
+    hoveredKey.value = null
+  }, 150)
+}
+
+function onPopupEnter() {
+  clearTimeout(hideTimer)
+}
+
+function onPopupLeave() {
+  hideTimer = setTimeout(() => {
+    hoveredKey.value = null
+  }, 150)
+}
+
+function onIconClick(item) {
+  if (!item.children) {
+    emit('menu-click', item.path || item.key)
+  }
+}
+
+function isItemActive(item) {
+  if (props.activeKey === (item.path || item.key)) return true
+  if (item.children) {
+    return item.children.some(child => {
+      if (props.activeKey === (child.path || child.key)) return true
+      if (child.children) {
+        return child.children.some(gc => props.activeKey === (gc.path || gc.key))
+      }
+      return false
+    })
+  }
+  return false
+}
 </script>
 
 <style scoped>
