@@ -62,6 +62,8 @@ let hideTimer = null
 
 function onIconEnter(key, event) {
   clearTimeout(hideTimer)
+  const item = props.items.find(i => i.key === key)
+  if (!item || !item.children) return
   const rect = event.currentTarget.getBoundingClientRect()
   popupStyle.value = {
     top: rect.top + 'px',
@@ -86,7 +88,15 @@ function onPopupLeave() {
   }, 150)
 }
 
+function onPopupItemClick(path) {
+  clearTimeout(hideTimer)
+  hoveredKey.value = null
+  emit('menu-click', path)
+}
+
 function onIconClick(item) {
+  clearTimeout(hideTimer)
+  hoveredKey.value = null
   if (!item.children) {
     emit('menu-click', item.path || item.key)
   }
