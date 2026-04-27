@@ -254,11 +254,13 @@ function isItemActive(item) {
 .sidebar-popup {
   position: fixed;
   min-width: 180px;
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
   background: #1e3a8a;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 4px;
   box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
-  z-index: 2000;
+  z-index: 1100;
   padding: 4px 0;
 }
 
