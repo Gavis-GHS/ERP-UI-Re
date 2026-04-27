@@ -79,11 +79,19 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { Chart } from 'chart.js/auto'
 import { DashboardData } from '@/data/dashboard'
 
 let chartInstances = []
+
+const legendItems = ref([])
+let inventoryChart = null
+
+const isMomNegative = computed(() => {
+  const v = DashboardData.inventoryStats.momChange
+  return v.startsWith('-')
+})
 
 onMounted(() => {
   nextTick(() => initCharts())
@@ -93,6 +101,120 @@ onBeforeUnmount(() => {
   chartInstances.forEach(c => c.destroy())
   chartInstances = []
 })
+
+const centerTextPlugin = {
+  id: 'centerText',
+  afterDraw(chart) {
+    const text = chart._centerText
+    const sub = chart._centerSubText
+    if (!text) return
+    const { ctx, chartArea: { top, bottom, left, right } } = chart
+    const cx = (left + right) / 2
+    const cy = (top + bottom) / 2
+
+    ctx.save()
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+
+    ctx.font = '600 14px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif'
+    ctx.fillStyle = '#1a365d'
+    ctx.fillText(text, cx, cy - 6)
+
+    ctx.font = '12px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif'
+    ctx.fillStyle = '#999'
+    ctx.fillText(sub, cx, cy + 14)
+
+    ctx.restore()
+  }
+}
+
+function initInventoryChart() {
+  const canvas = document.getElementById('inventoryDoughnutChart')
+  if (!canvas) return null
+
+  const d = DashboardData.inventoryStats
+  const cats = d.categories
+  const total = cats.reduce((s, c) => s + c.value, 0)
+  const maxCat = cats.reduce((a, b) => (a.value > b.value ? a : b))
+
+  legendItems.value = cats.map(c => ({
+    name: c.name,
+    color: c.color,
+    pct: ((c.value / total) * 100).toFixed(1) + '%',
+    hidden: false
+  }))
+
+  let centerName = maxCat.name
+  let centerPct = ((maxCat.value / total) * 100).toFixed(1) + '%'
+
+  const chart = new Chart(canvas, {
+    type: 'doughnut',
+    data: {
+      labels: cats.map(c => c.name),
+      datasets: [{
+        data: cats.map(c => c.value),
+        backgroundColor: cats.map(c => c.color),
+        borderColor: '#fff',
+        borderWidth: 2,
+        hoverBorderWidth: 3,
+        hoverBorderColor: '#fff',
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      cutout: '65%',
+      animation: {
+        animateRotate: true,
+        duration: 800,
+        easing: 'easeInOutQuart'
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: true }
+      },
+      onHover(_event, elements) {
+        canvas.style.cursor = elements.length ? 'pointer' : 'default'
+        if (elements.length) {
+          const c = cats[elements[0].index]
+          centerName = c.name
+          centerPct = ((c.value / total) * 100).toFixed(1) + '%'
+        } else {
+          centerName = maxCat.name
+          centerPct = ((maxCat.value / total) * 100).toFixed(1) + '%'
+        }
+        chart._centerText = centerName
+        chart._centerSubText = centerPct
+        chart.draw()
+      }
+    },
+    plugins: [centerTextPlugin]
+  })
+
+  chart._centerText = centerName
+  chart._centerSubText = centerPct
+
+  return chart
+}
+
+function toggleLegend(idx) {
+  const item = legendItems.value[idx]
+  item.hidden = !item.hidden
+
+  const visible = legendItems.value.filter(it => !it.hidden)
+  const allCats = DashboardData.inventoryStats.categories
+
+  if (visible.length === 0) {
+    item.hidden = false
+    return
+  }
+
+  inventoryChart.data.labels = visible.map(it => it.name)
+  inventoryChart.data.datasets[0].data = visible.map(it => allCats.find(c => c.name === it.name).value)
+  inventoryChart.data.datasets[0].backgroundColor = visible.map(it => it.color)
+  inventoryChart.update()
+}
 
 function initCharts() {
   chartInstances.forEach(c => c.destroy())
@@ -184,6 +306,9 @@ function initCharts() {
       }
     }))
   }
+
+  inventoryChart = initInventoryChart()
+  if (inventoryChart) chartInstances.push(inventoryChart)
 }
 </script>
 
