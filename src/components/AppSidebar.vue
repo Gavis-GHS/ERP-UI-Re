@@ -209,7 +209,7 @@ function isItemActive(item) {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 4px;
+  padding-top: 0;
 }
 
 .icon-wrapper {
@@ -220,7 +220,7 @@ function isItemActive(item) {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  height: 56px;
   cursor: pointer;
   color: rgba(255,255,255,0.7);
   transition: color 0.2s, background 0.2s;
