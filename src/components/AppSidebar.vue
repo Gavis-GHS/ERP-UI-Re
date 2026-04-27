@@ -189,4 +189,108 @@ function isItemActive(item) {
   border-right: none !important;
   height: 100%;
 }
+
+/* Collapsed mode sidebar */
+.sidebar.collapsed {
+  width: 60px;
+  min-width: 60px;
+  overflow: visible;
+}
+
+/* Icon list */
+.sidebar-icons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 4px;
+}
+
+.icon-wrapper {
+  position: relative;
+}
+
+.icon-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.2s, background 0.2s;
+}
+
+.icon-item:hover,
+.icon-item.active {
+  color: #409eff;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Toggle button */
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.2s;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+
+.sidebar-toggle:hover {
+  color: rgba(255,255,255,0.8);
+}
+
+.toggle-icon {
+  font-size: 16px;
+}
+</style>
+
+<style>
+/* Popup styles — unscoped because Teleport moves DOM to body, outside scoped boundary */
+.sidebar-popup {
+  position: fixed;
+  min-width: 180px;
+  background: #1e3a8a;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+  z-index: 2000;
+  padding: 4px 0;
+}
+
+.popup-header {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 4px;
+}
+
+.popup-item {
+  padding: 8px 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.popup-item:hover,
+.popup-item.active {
+  background: rgba(64,158,255,0.2);
+  color: #409eff;
+}
+
+.popup-sub-label {
+  padding: 6px 16px 2px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+.popup-sub-item {
+  padding-left: 28px;
+}
 </style>
