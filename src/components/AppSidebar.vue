@@ -119,3 +119,18 @@ const emit = defineEmits(['menu-click', 'toggle-collapse'])
   100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 </style>
+
+<style>
+/* Collapsed mode: fade out text, keep icons visible */
+.sidebar.collapsed .el-menu-item > span + span,
+.sidebar.collapsed .el-sub-menu__title > span + span {
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar .el-menu-item > span + span,
+.sidebar .el-sub-menu__title > span + span {
+  opacity: 1;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>
