@@ -205,8 +205,12 @@ function initInventoryChart() {
       },
       onHover(_event, elements) {
         canvas.style.cursor = elements.length ? 'pointer' : 'default'
-        const newName = elements.length ? cats[elements[0].index].name : maxCat.name
-        const newVal = elements.length ? cats[elements[0].index].value : maxCat.value
+        const newName = elements.length
+          ? chart.data.labels[elements[0].index]
+          : maxCat.name
+        const newVal = elements.length
+          ? chart.data.datasets[0].data[elements[0].index]
+          : maxCat.value
         const newPct = ((newVal / total) * 100).toFixed(1) + '%'
         if (chart._centerText !== newName || chart._centerSubText !== newPct) {
           chart._centerText = newName
