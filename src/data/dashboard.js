@@ -22,5 +22,16 @@ export const DashboardData = {
     costChange: '-3.2%',
     inTransitOrders: 47,
     inventoryDays: 28
+  },
+  inventoryStats: {
+    totalAmount: '¥12,680万',
+    momChange: '-3.2%',
+    categories: [
+      { name: '气罐材料', value: 5730, color: '#409eff' },
+      { name: '空间布材料', value: 3626, color: '#67c23a' },
+      { name: 'PVC膜', value: 2003, color: '#e6a23c' },
+      { name: '网格材料', value: 926, color: '#f56c6c' },
+      { name: '水膜材料', value: 395, color: '#909399' }
+    ]
   }
 }
