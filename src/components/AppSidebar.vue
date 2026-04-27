@@ -184,6 +184,7 @@ function isItemActive(item) {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  background-color: #1e3a8a;
 }
 .sidebar .el-menu {
   border-right: none !important;
@@ -236,6 +237,7 @@ function isItemActive(item) {
   transition: color 0.2s;
   border-top: 1px solid rgba(255,255,255,0.06);
   flex-shrink: 0;
+  user-select: none;
 }
 
 .sidebar-toggle:hover {
