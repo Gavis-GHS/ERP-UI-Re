@@ -39,7 +39,7 @@ const activeMenu = ref('/home')
 const navItems = ref([])
 const logo = ref(TopNavData.logo)
 const userName = ref(TopNavData.userName)
-const isSidebarCollapsed = ref(false)
+const isSidebarCollapsed = ref(true)
 const openedTabs = ref([
   { path: '/home', label: '首页', closable: false }
 ])
