@@ -190,7 +190,6 @@ function isItemActive(item) {
   display: flex;
   flex-direction: column;
   background-color: #1e3a8a;
-  transition: width 0.3s ease, min-width 0.3s ease;
 }
 .sidebar .el-menu {
   border-right: none !important;
