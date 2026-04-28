@@ -56,8 +56,8 @@ function handleDropdownCommand(command) {
 
 <style scoped>
 .topnav {
-  height: 50px;
-  min-height: 50px;
+  height: 56px;
+  min-height: 56px;
   background: #409eff;
   display: flex;
   align-items: center;

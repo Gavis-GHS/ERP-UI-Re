@@ -117,7 +117,7 @@ const emit = defineEmits(['menu-click', 'toggle-collapse'])
 }
 
 .sidebar-logo {
-  margin-left: 16px;
+  margin-left: 32px;
   height: 40px;
   transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
