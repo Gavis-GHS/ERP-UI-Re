@@ -210,13 +210,12 @@ function isItemActive(item) {
   display: flex;
   flex-direction: column;
   opacity: 1;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease;
 }
 
 .sidebar-full.hidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease;
 }
 
 .menu-wrapper {
@@ -238,13 +237,12 @@ function isItemActive(item) {
   height: 100%;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease 0.15s;
+  transition: opacity 0.2s ease;
 }
 
 .sidebar-minimal.visible {
   opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.15s ease 0.15s;
 }
 
 /* Icon list */
