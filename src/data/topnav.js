@@ -1,4 +1,4 @@
 export const TopNavData = {
-  logo: '企业管理系统',
+  logo: '思嘉供应商平台',
   userName: ''
 }
