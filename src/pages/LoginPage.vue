@@ -33,8 +33,11 @@
       <!-- Right: Login Card -->
       <div class="login-area">
         <div class="login-card">
+          <div class="card-system-name">思嘉供应商平台</div>
           <img src="@/assets/logo.png" alt="SIJIA TEX" class="card-logo" />
-          <h2 class="card-title">登录</h2>
+          <h2 class="card-title">欢迎回来</h2>
+          <p class="card-subtitle">登录您的账户</p>
+          <div class="card-divider"></div>
 
           <div class="field">
             <label class="field-label">用户名</label>
@@ -166,30 +169,30 @@ async function handleLogin() {
 }
 
 .blob-blue {
-  width: 380px;
-  height: 380px;
-  top: -10%;
-  left: -6%;
-  background: radial-gradient(circle at 50% 50%, rgba(64, 158, 255, 0.45) 0%, rgba(64, 158, 255, 0.1) 40%, transparent 70%);
+  width: 350px;
+  height: 350px;
+  top: 5%;
+  right: 10%;
+  background: radial-gradient(circle at 50% 50%, rgba(64, 158, 255, 0.65) 0%, rgba(64, 158, 255, 0.20) 40%, transparent 70%);
   animation-duration: 11s;
 }
 
 .blob-green {
-  width: 280px;
-  height: 280px;
-  bottom: -8%;
-  left: 18%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 153, 102, 0.35) 0%, rgba(0, 153, 102, 0.08) 40%, transparent 70%);
+  width: 260px;
+  height: 260px;
+  top: 55%;
+  right: 20%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 153, 102, 0.55) 0%, rgba(0, 153, 102, 0.15) 40%, transparent 70%);
   animation-duration: 8s;
   animation-delay: -3s;
 }
 
 .blob-purple {
-  width: 240px;
-  height: 240px;
-  top: 40%;
-  right: -4%;
-  background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.3) 0%, rgba(124, 58, 237, 0.06) 40%, transparent 70%);
+  width: 220px;
+  height: 220px;
+  top: 25%;
+  right: 5%;
+  background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.50) 0%, rgba(124, 58, 237, 0.12) 40%, transparent 70%);
   animation-duration: 12s;
   animation-delay: -6s;
 }
@@ -197,9 +200,9 @@ async function handleLogin() {
 .blob-amber {
   width: 180px;
   height: 180px;
-  top: 12%;
-  right: 32%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 149, 0, 0.25) 0%, rgba(255, 149, 0, 0.05) 40%, transparent 70%);
+  bottom: 5%;
+  right: 35%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 149, 0, 0.45) 0%, rgba(255, 149, 0, 0.10) 40%, transparent 70%);
   animation-duration: 7s;
   animation-delay: -1s;
 }
@@ -291,8 +294,8 @@ async function handleLogin() {
 }
 
 .login-card {
-  width: 340px;
-  padding: 40px 36px;
+  width: 380px;
+  padding: 48px 40px;
   background: #fff;
   border-radius: 20px;
   box-shadow:
@@ -300,21 +303,41 @@ async function handleLogin() {
     0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+.card-system-name {
+  text-align: center;
+  font-size: 12px;
+  color: #86868b;
+  margin-bottom: 8px;
+}
+
 .card-logo {
   display: block;
   width: 120px;
   height: auto;
-  margin: 0 auto 24px;
+  margin: 0 auto 16px;
   object-fit: contain;
 }
 
 .card-title {
-  margin: 0 0 28px;
+  margin: 0 0 6px;
   text-align: center;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   color: #1d1d1f;
   letter-spacing: -0.2px;
+}
+
+.card-subtitle {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #86868b;
+}
+
+.card-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin-bottom: 20px;
 }
 
 /* ====== Form Fields ====== */
