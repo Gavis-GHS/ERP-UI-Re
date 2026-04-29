@@ -80,7 +80,8 @@ async function handleLogin() {
     } else {
       ElMessage.error(data.Msg || '用户名或密码错误')
     }
-  } catch {
+  } catch (err) {
+    console.error('登录请求失败:', err)
     ElMessage.error('网络请求失败，请检查网络连接')
   } finally {
     loading.value = false

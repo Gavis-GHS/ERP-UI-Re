@@ -8,5 +8,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  server: {
+    proxy: {
+      '/erp': {
+        target: 'http://192.168.80.83:63934',
+        changeOrigin: true
+      }
+    }
   }
 })
