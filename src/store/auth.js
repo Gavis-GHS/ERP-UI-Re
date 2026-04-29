@@ -1,5 +1,4 @@
 import { reactive, computed } from 'vue'
-import router from '@/router'
 
 const STORAGE_KEY = 'user_info'
 
@@ -30,11 +29,9 @@ export function login(user) {
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(info))
   state.userInfo = info
-  router.push('/home')
 }
 
 export function logout() {
   localStorage.removeItem(STORAGE_KEY)
   state.userInfo = null
-  router.push('/login')
 }

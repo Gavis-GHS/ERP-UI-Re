@@ -43,9 +43,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { loginApi } from '@/api/auth'
 import { login } from '@/store/auth'
+
+const router = useRouter()
 
 const userName = ref('')
 const passWord = ref('')
@@ -77,6 +80,7 @@ async function handleLogin() {
         supName: data.Data.supName,
         checkFlag: data.Data.checkFlag
       })
+      router.push('/home')
     } else {
       ElMessage.error(data.Msg || '用户名或密码错误')
     }

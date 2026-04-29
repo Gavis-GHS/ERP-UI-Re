@@ -35,8 +35,11 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import { Icons } from '@/data/icons'
 import { logout } from '@/store/auth'
+
+const router = useRouter()
 
 defineProps({
   logo: { type: String, default: '企业管理系统' },
@@ -47,6 +50,7 @@ defineProps({
 function handleDropdownCommand(command) {
   if (command === 'logout') {
     logout()
+    router.push('/login')
   } else if (command === 'profile') {
     alert('个人中心')
   } else if (command === 'settings') {
