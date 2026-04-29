@@ -70,11 +70,11 @@
             <span v-else>登 录</span>
           </button>
         </div>
+
+        <!-- Copyright -->
+        <div class="copyright">© 2026 思嘉供应商平台 版权所有</div>
       </div>
     </div>
-
-    <!-- Copyright -->
-    <div class="copyright">© 2026 思嘉供应商平台 版权所有</div>
   </div>
 </template>
 
@@ -292,6 +292,7 @@ async function handleLogin() {
 .login-area {
   flex: 3;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -422,11 +423,7 @@ async function handleLogin() {
 
 /* ====== Copyright ====== */
 .copyright {
-  position: absolute;
-  bottom: 24px;
-  left: 0;
-  right: 0;
-  z-index: 2;
+  margin-top: 16px;
   text-align: center;
   font-size: 12px;
   color: #aeaeb2;
