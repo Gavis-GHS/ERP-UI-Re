@@ -210,12 +210,13 @@ function isItemActive(item) {
   display: flex;
   flex-direction: column;
   opacity: 1;
-  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.15s ease;
 }
 
 .sidebar-full.hidden {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 
 .menu-wrapper {
@@ -237,12 +238,13 @@ function isItemActive(item) {
   height: 100%;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.15s ease 0.15s;
 }
 
 .sidebar-minimal.visible {
   opacity: 1;
   pointer-events: auto;
+  transition: opacity 0.15s ease 0.15s;
 }
 
 /* Icon list */
