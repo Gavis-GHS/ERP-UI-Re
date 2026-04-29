@@ -295,7 +295,7 @@ async function handleLogin() {
 
 .login-card {
   width: 380px;
-  padding: 80px 44px;
+  padding: 60px 44px;
   background: #fff;
   border-radius: 20px;
   box-shadow:
@@ -309,19 +309,19 @@ async function handleLogin() {
   font-weight: 600;
   color: #1d1d1f;
   letter-spacing: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .card-logo {
   display: block;
   width: 120px;
   height: auto;
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
   object-fit: contain;
 }
 
 .card-title {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   text-align: center;
   font-size: 24px;
   font-weight: 600;
@@ -330,7 +330,7 @@ async function handleLogin() {
 }
 
 .card-subtitle {
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   text-align: center;
   font-size: 15px;
   color: #86868b;
@@ -339,7 +339,7 @@ async function handleLogin() {
 .card-divider {
   height: 1px;
   background: #f0f0f0;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 /* ====== Form Fields ====== */
