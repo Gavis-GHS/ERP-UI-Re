@@ -295,7 +295,7 @@ async function handleLogin() {
 
 .login-card {
   width: 380px;
-  padding: 48px 40px;
+  padding: 64px 44px;
   background: #fff;
   border-radius: 20px;
   box-shadow:
@@ -386,7 +386,7 @@ async function handleLogin() {
   display: block;
   width: 100%;
   padding: 13px;
-  background: #1d1d1f;
+  background: #409eff;
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -399,11 +399,11 @@ async function handleLogin() {
 }
 
 .login-btn:hover:not(:disabled) {
-  background: #3a3a3c;
+  background: #66b1ff;
 }
 
 .login-btn:active:not(:disabled) {
-  background: #000;
+  background: #3a8ee6;
 }
 
 .login-btn:disabled {
