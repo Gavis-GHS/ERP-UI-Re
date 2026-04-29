@@ -9,7 +9,7 @@
       <div class="menu-wrapper">
         <el-menu
           :default-active="activeKey"
-          background-color="#1e3a8a"
+          background-color="#1e293b"
           text-color="#ffffff"
           active-text-color="#409eff"
           @select="(index) => emit('menu-click', index)"
@@ -191,7 +191,7 @@ function isItemActive(item) {
   height: 100vh;
   overflow: hidden;
   flex-shrink: 0;
-  background-color: #1e3a8a;
+  background-color: #1e293b;
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -308,7 +308,7 @@ function isItemActive(item) {
   min-width: 180px;
   max-height: calc(100vh - 16px);
   overflow-y: auto;
-  background: #1e3a8a;
+  background: #1e293b;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 4px;
   box-shadow: 4px 4px 12px rgba(0,0,0,0.3);

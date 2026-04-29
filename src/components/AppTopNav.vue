@@ -16,7 +16,7 @@
       </div>
       <el-dropdown @command="handleDropdownCommand">
         <span class="user-profile el-dropdown-link">
-          <el-avatar :size="28" style="background:#fff;color:#409eff;font-size:12px;flex-shrink:0;">
+          <el-avatar :size="28" style="background:#409eff;color:#fff;font-size:12px;flex-shrink:0;">
             {{ userName.charAt(0) }}
           </el-avatar>
           <span class="user-name">{{ userName }}</span>
@@ -63,11 +63,12 @@ function handleDropdownCommand(command) {
 .topnav {
   height: 56px;
   min-height: 56px;
-  background: #409eff;
+  background: #fff;
   display: flex;
   align-items: center;
   padding: 0 16px;
-  color: #fff;
+  color: #1d1d1f;
+  border-bottom: 1px solid #e5e5e5;
 }
 .topnav-left {
   flex-shrink: 0;
@@ -98,7 +99,7 @@ function handleDropdownCommand(command) {
   opacity: 0.9;
 }
 .topnav-item:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.05);
   opacity: 1;
 }
 .star-icon {
@@ -106,7 +107,7 @@ function handleDropdownCommand(command) {
   align-items: center;
   color: #fbbf24;
 }
-.nav-label { color: #fff; }
+.nav-label { color: #1d1d1f; }
 .topnav-right {
   flex-shrink: 0;
   display: flex;
@@ -117,7 +118,7 @@ function handleDropdownCommand(command) {
 .search-box {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,0.9);
+  background: #f5f5f7;
   border-radius: 4px;
   padding: 0 10px;
   width: 200px;
@@ -125,7 +126,7 @@ function handleDropdownCommand(command) {
 }
 .search-box:focus-within {
   background: #fff;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+  box-shadow: 0 0 0 2px rgba(64,158,255,0.2);
 }
 .search-icon {
   display: flex;
@@ -156,7 +157,7 @@ function handleDropdownCommand(command) {
   user-select: none;
   outline: none;
 }
-.user-profile:hover { background: rgba(255,255,255,0.15); }
+.user-profile:hover { background: rgba(0,0,0,0.05); }
 .user-avatar {
   display: flex;
   align-items: center;

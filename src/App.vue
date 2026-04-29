@@ -101,7 +101,7 @@ watch(() => route.path, (path) => {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: #f0f4f8;
+  background: #f5f5f7;
   color: #333;
   overflow: hidden;
   height: 100vh;
@@ -118,7 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background: #f0f4f8;
+  background: #f5f5f7;
 }
 
 .main-content {
@@ -126,7 +126,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #f0f4f8;
+  background: #f5f5f7;
 }
 
 .content-area {
