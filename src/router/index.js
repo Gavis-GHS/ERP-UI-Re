@@ -1,7 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { isLoggedIn } from '@/store/auth'
 
 const routes = [
   { path: '/', redirect: '/home' },
+  {
+    path: '/login',
+    component: () => import('@/pages/LoginPage.vue')
+  },
   {
     path: '/home',
     component: () => import('@/pages/HomePage.vue')
@@ -70,6 +75,15 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach((to) => {
+  if (to.path === '/login') {
+    if (isLoggedIn.value) return '/home'
+    return true
+  }
+  if (!isLoggedIn.value) return '/login'
+  return true
 })
 
 export default router
