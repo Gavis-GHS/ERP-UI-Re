@@ -135,9 +135,7 @@ async function handleLogin() {
         checkFlag: data.Data.checkFlag
       })
       ElMessage.success('登录成功，欢迎回来')
-      setTimeout(() => {
-        router.push('/home')
-      }, 500)
+      router.push('/home')
     } else {
       ElMessage.error(data.Msg || '用户名或密码错误')
     }
