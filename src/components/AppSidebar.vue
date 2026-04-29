@@ -1,6 +1,63 @@
 <template>
   <div class="sidebar" :class="{ collapsed }">
-    <!-- Full-width mode -->
+    <!-- Minimal mode: icon list (always visible, underneath) -->
+    <div class="sidebar-minimal">
+      <div class="sidebar-icons">
+        <div class="icon-item toggle-icon-item" @click="emit('toggle-collapse')">
+          <span v-html="Icons.expand" class="toggle-icon-svg"></span>
+        </div>
+        <div
+          v-for="item in items"
+          :key="item.key"
+          class="icon-wrapper"
+        >
+          <div
+            class="icon-item"
+            :class="{ active: isItemActive(item) }"
+            @click="onIconClick(item)"
+            @mouseenter="onIconEnter(item.key, $event)"
+            @mouseleave="onIconLeave"
+          >
+            <span v-html="Icons[item.icon] || ''"></span>
+          </div>
+          <Teleport to="body">
+            <div
+              v-if="item.children && hoveredKey === item.key"
+              class="sidebar-popup"
+              :style="popupStyle"
+              @mouseenter="onPopupEnter"
+              @mouseleave="onPopupLeave"
+            >
+              <div class="popup-header">{{ item.label }}</div>
+              <template v-for="child in item.children" :key="child.key">
+                <div
+                  v-if="!child.children"
+                  class="popup-item"
+                  :class="{ active: activeKey === (child.path || child.key) }"
+                  @click="onPopupItemClick(child.path || child.key)"
+                >
+                  {{ child.label }}
+                </div>
+                <template v-else>
+                  <div class="popup-sub-label">{{ child.label }}</div>
+                  <div
+                    v-for="gc in child.children"
+                    :key="gc.key"
+                    class="popup-item popup-sub-item"
+                    :class="{ active: activeKey === (gc.path || gc.key) }"
+                    @click="onPopupItemClick(gc.path || gc.key)"
+                  >
+                    {{ gc.label }}
+                  </div>
+                </template>
+              </template>
+            </div>
+          </Teleport>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-width mode (overlay on top, fades out when collapsed) -->
     <div class="sidebar-full" :class="{ hidden: collapsed }">
       <div class="sidebar-toggle-top" @click="emit('toggle-collapse')">
         <span v-html="Icons.collapse" class="toggle-icon-svg"></span>
@@ -47,65 +104,6 @@
       </div>
     </div>
 
-    <!-- Minimal mode: icon list + teleported popups -->
-    <div class="sidebar-minimal" :class="{ visible: collapsed }">
-      <div class="sidebar-icons">
-        <!-- Expand toggle -->
-        <div class="icon-item toggle-icon-item" @click="emit('toggle-collapse')">
-          <span v-html="Icons.expand" class="toggle-icon-svg"></span>
-        </div>
-        <!-- Menu icons -->
-        <div
-          v-for="item in items"
-          :key="item.key"
-          class="icon-wrapper"
-        >
-          <div
-            class="icon-item"
-            :class="{ active: isItemActive(item) }"
-            @click="onIconClick(item)"
-            @mouseenter="onIconEnter(item.key, $event)"
-            @mouseleave="onIconLeave"
-          >
-            <span v-html="Icons[item.icon] || ''"></span>
-          </div>
-
-          <Teleport to="body">
-            <div
-              v-if="item.children && hoveredKey === item.key"
-              class="sidebar-popup"
-              :style="popupStyle"
-              @mouseenter="onPopupEnter"
-              @mouseleave="onPopupLeave"
-            >
-              <div class="popup-header">{{ item.label }}</div>
-              <template v-for="child in item.children" :key="child.key">
-                <div
-                  v-if="!child.children"
-                  class="popup-item"
-                  :class="{ active: activeKey === (child.path || child.key) }"
-                  @click="onPopupItemClick(child.path || child.key)"
-                >
-                  {{ child.label }}
-                </div>
-                <template v-else>
-                  <div class="popup-sub-label">{{ child.label }}</div>
-                  <div
-                    v-for="gc in child.children"
-                    :key="gc.key"
-                    class="popup-item popup-sub-item"
-                    :class="{ active: activeKey === (gc.path || gc.key) }"
-                    @click="onPopupItemClick(gc.path || gc.key)"
-                  >
-                    {{ gc.label }}
-                  </div>
-                </template>
-              </template>
-            </div>
-          </Teleport>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -200,7 +198,7 @@ function isItemActive(item) {
   min-width: 60px;
 }
 
-/* Full-width container */
+/* Full-width container — overlay on top */
 .sidebar-full {
   position: absolute;
   left: 0;
@@ -209,8 +207,9 @@ function isItemActive(item) {
   height: 100%;
   display: flex;
   flex-direction: column;
+  z-index: 2;
   opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 .sidebar-full.hidden {
@@ -228,21 +227,14 @@ function isItemActive(item) {
   height: 100%;
 }
 
-/* Minimal container */
+/* Minimal container — always visible underneath */
 .sidebar-minimal {
   position: absolute;
   left: 0;
   top: 0;
   width: 60px;
   height: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.sidebar-minimal.visible {
-  opacity: 1;
-  pointer-events: auto;
+  z-index: 1;
 }
 
 /* Icon list */
