@@ -36,6 +36,7 @@
 
 <script setup>
 import { Icons } from '@/data/icons'
+import { logout } from '@/store/auth'
 
 defineProps({
   logo: { type: String, default: '企业管理系统' },
@@ -45,7 +46,7 @@ defineProps({
 
 function handleDropdownCommand(command) {
   if (command === 'logout') {
-    alert('退出登录')
+    logout()
   } else if (command === 'profile') {
     alert('个人中心')
   } else if (command === 'settings') {
