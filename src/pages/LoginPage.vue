@@ -305,8 +305,10 @@ async function handleLogin() {
 
 .card-system-name {
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 600;
   color: #1d1d1f;
+  letter-spacing: 2px;
   margin-bottom: 8px;
 }
 
