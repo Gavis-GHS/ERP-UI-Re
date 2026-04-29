@@ -305,8 +305,8 @@ async function handleLogin() {
 
 .card-system-name {
   text-align: center;
-  font-size: 12px;
-  color: #86868b;
+  font-size: 14px;
+  color: #409eff;
   margin-bottom: 8px;
 }
 
@@ -321,17 +321,17 @@ async function handleLogin() {
 .card-title {
   margin: 0 0 8px;
   text-align: center;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: #409eff;
   letter-spacing: -0.2px;
 }
 
 .card-subtitle {
   margin: 0 0 24px;
   text-align: center;
-  font-size: 13px;
-  color: #86868b;
+  font-size: 15px;
+  color: #66b1ff;
 }
 
 .card-divider {
