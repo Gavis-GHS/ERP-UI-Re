@@ -129,7 +129,7 @@ async function handleLogin() {
 .blob {
   position: absolute;
   border-radius: 50%;
-  animation: blobFloat 16s ease-in-out infinite alternate;
+  animation: blobFloat 10s ease-in-out infinite alternate;
 }
 
 .blob-blue {
@@ -138,7 +138,7 @@ async function handleLogin() {
   top: -10%;
   left: -6%;
   background: radial-gradient(circle at 50% 50%, rgba(64, 158, 255, 0.45) 0%, rgba(64, 158, 255, 0.1) 40%, transparent 70%);
-  animation-duration: 18s;
+  animation-duration: 11s;
 }
 
 .blob-green {
@@ -147,8 +147,8 @@ async function handleLogin() {
   bottom: -8%;
   left: 18%;
   background: radial-gradient(circle at 50% 50%, rgba(0, 153, 102, 0.35) 0%, rgba(0, 153, 102, 0.08) 40%, transparent 70%);
-  animation-duration: 14s;
-  animation-delay: -4s;
+  animation-duration: 8s;
+  animation-delay: -3s;
 }
 
 .blob-purple {
@@ -157,8 +157,8 @@ async function handleLogin() {
   top: 40%;
   right: -4%;
   background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.3) 0%, rgba(124, 58, 237, 0.06) 40%, transparent 70%);
-  animation-duration: 20s;
-  animation-delay: -8s;
+  animation-duration: 12s;
+  animation-delay: -6s;
 }
 
 .blob-amber {
@@ -167,8 +167,8 @@ async function handleLogin() {
   top: 12%;
   right: 32%;
   background: radial-gradient(circle at 50% 50%, rgba(255, 149, 0, 0.25) 0%, rgba(255, 149, 0, 0.05) 40%, transparent 70%);
-  animation-duration: 12s;
-  animation-delay: -2s;
+  animation-duration: 7s;
+  animation-delay: -1s;
 }
 
 @keyframes blobFloat {
@@ -178,19 +178,19 @@ async function handleLogin() {
   }
   25% {
     border-radius: 42% 58% 52% 48% / 48% 52% 48% 52%;
-    transform: translate(40px, -30px) scale(1.1) rotate(3deg);
+    transform: translate(120px, 80px) scale(1.15) rotate(5deg);
   }
   50% {
     border-radius: 52% 48% 58% 42% / 50% 50% 50% 50%;
-    transform: translate(-20px, 35px) scale(0.92) rotate(-2deg);
+    transform: translate(-80px, -60px) scale(0.88) rotate(-4deg);
   }
   75% {
     border-radius: 48% 52% 42% 58% / 58% 42% 58% 42%;
-    transform: translate(25px, 15px) scale(1.06) rotate(2deg);
+    transform: translate(-100px, 90px) scale(1.08) rotate(3deg);
   }
   100% {
     border-radius: 50% 50% 48% 52% / 48% 52% 50% 50%;
-    transform: translate(-30px, -20px) scale(1.03) rotate(-1deg);
+    transform: translate(60px, -100px) scale(1.04) rotate(-2deg);
   }
 }
 
