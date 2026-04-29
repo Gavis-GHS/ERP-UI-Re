@@ -69,7 +69,7 @@ async function handleLogin() {
   try {
     const encryptedPwd = window.btoa(passWord.value)
     const data = await loginApi(userName.value, encryptedPwd)
-    if (data.Code === '200') {
+    if (data.Code == 200) {
       login({
         userName: userName.value,
         supid: data.Data.supid,
