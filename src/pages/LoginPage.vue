@@ -363,8 +363,8 @@ async function handleLogin() {
   display: block;
   width: 100%;
   padding: 12px 14px;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  border: 1px solid #d0d0d0;
   border-radius: 10px;
   font-size: 15px;
   color: #1d1d1f;
@@ -379,8 +379,8 @@ async function handleLogin() {
 }
 
 .field-input:focus {
-  border-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+  border-color: #409eff;
+  box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.15);
 }
 
 /* ====== Button ====== */
