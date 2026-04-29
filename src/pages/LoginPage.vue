@@ -5,11 +5,11 @@
       <div class="blob blob-blue"></div>
       <div class="blob blob-green"></div>
       <div class="blob blob-purple"></div>
-      <div class="blob blob-orange"></div>
+      <div class="blob blob-amber"></div>
     </div>
 
-    <!-- Glass overlay -->
-    <div class="glass-overlay"></div>
+    <!-- Frosted glass overlay -->
+    <div class="frost-overlay"></div>
 
     <!-- Content -->
     <div class="content">
@@ -123,91 +123,91 @@ async function handleLogin() {
 .blob-layer {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  z-index: 0;
 }
 
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(40px);
-  animation: blobMorph 16s ease-in-out infinite alternate;
+  animation: blobFloat 16s ease-in-out infinite alternate;
 }
 
 .blob-blue {
-  width: 320px;
-  height: 320px;
-  top: -8%;
-  left: -4%;
-  background: radial-gradient(circle at 50% 50%, rgba(64,158,255,0.25) 0%, transparent 70%);
+  width: 380px;
+  height: 380px;
+  top: -10%;
+  left: -6%;
+  background: radial-gradient(circle at 50% 50%, rgba(64, 158, 255, 0.45) 0%, rgba(64, 158, 255, 0.1) 40%, transparent 70%);
   animation-duration: 18s;
 }
 
 .blob-green {
-  width: 240px;
-  height: 240px;
-  bottom: -5%;
-  left: 22%;
-  background: radial-gradient(circle at 50% 50%, rgba(0,153,102,0.2) 0%, transparent 70%);
+  width: 280px;
+  height: 280px;
+  bottom: -8%;
+  left: 18%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 153, 102, 0.35) 0%, rgba(0, 153, 102, 0.08) 40%, transparent 70%);
   animation-duration: 14s;
   animation-delay: -4s;
 }
 
 .blob-purple {
-  width: 200px;
-  height: 200px;
-  top: 45%;
-  right: -2%;
-  background: radial-gradient(circle at 50% 50%, rgba(124,58,237,0.15) 0%, transparent 70%);
+  width: 240px;
+  height: 240px;
+  top: 40%;
+  right: -4%;
+  background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.3) 0%, rgba(124, 58, 237, 0.06) 40%, transparent 70%);
   animation-duration: 20s;
   animation-delay: -8s;
 }
 
-.blob-orange {
-  width: 160px;
-  height: 160px;
-  top: 15%;
-  right: 28%;
-  background: radial-gradient(circle at 50% 50%, rgba(255,149,0,0.12) 0%, transparent 70%);
+.blob-amber {
+  width: 180px;
+  height: 180px;
+  top: 12%;
+  right: 32%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 149, 0, 0.25) 0%, rgba(255, 149, 0, 0.05) 40%, transparent 70%);
   animation-duration: 12s;
   animation-delay: -2s;
 }
 
-@keyframes blobMorph {
+@keyframes blobFloat {
   0% {
-    border-radius: 60% 40% 50% 45% / 55% 45% 55% 45%;
-    transform: translate(0, 0) scale(1);
+    border-radius: 58% 42% 48% 52% / 52% 48% 52% 48%;
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
   25% {
-    border-radius: 40% 60% 45% 55% / 45% 55% 45% 55%;
-    transform: translate(30px, -20px) scale(1.08);
+    border-radius: 42% 58% 52% 48% / 48% 52% 48% 52%;
+    transform: translate(40px, -30px) scale(1.1) rotate(3deg);
   }
   50% {
-    border-radius: 55% 45% 60% 40% / 50% 50% 50% 50%;
-    transform: translate(-15px, 25px) scale(0.95);
+    border-radius: 52% 48% 58% 42% / 50% 50% 50% 50%;
+    transform: translate(-20px, 35px) scale(0.92) rotate(-2deg);
   }
   75% {
-    border-radius: 45% 55% 40% 60% / 60% 40% 60% 40%;
-    transform: translate(20px, 10px) scale(1.05);
+    border-radius: 48% 52% 42% 58% / 58% 42% 58% 42%;
+    transform: translate(25px, 15px) scale(1.06) rotate(2deg);
   }
   100% {
-    border-radius: 50% 50% 45% 55% / 45% 55% 50% 50%;
-    transform: translate(-25px, -15px) scale(1.02);
+    border-radius: 50% 50% 48% 52% / 48% 52% 50% 50%;
+    transform: translate(-30px, -20px) scale(1.03) rotate(-1deg);
   }
 }
 
-/* ====== Glass Overlay ====== */
-.glass-overlay {
+/* ====== Frosted Glass Overlay ====== */
+.frost-overlay {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(100px);
-  -webkit-backdrop-filter: blur(100px);
-  background: rgba(245, 245, 247, 0.3);
+  z-index: 1;
+  backdrop-filter: blur(60px) saturate(1.2);
+  -webkit-backdrop-filter: blur(60px) saturate(1.2);
+  background: rgba(250, 250, 252, 0.25);
 }
 
-/* ====== Content Layout ====== */
+/* ====== Content ====== */
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   height: 100%;
   align-items: center;
@@ -221,9 +221,10 @@ async function handleLogin() {
 }
 
 .logo {
-  width: 160px;
+  width: 180px;
   height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
 }
 
 .card-area {
@@ -238,10 +239,10 @@ async function handleLogin() {
 .glass-card {
   width: 340px;
   padding: 40px 36px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 20px;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.06),
@@ -278,7 +279,7 @@ async function handleLogin() {
   display: block;
   width: 100%;
   padding: 12px 14px;
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   font-size: 15px;
