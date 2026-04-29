@@ -13,11 +13,27 @@
 
     <!-- Content -->
     <div class="content">
-      <div class="brand-area">
-        <img src="@/assets/logo.png" alt="SIJIA TEX" class="logo" />
+      <!-- Left: Carousel -->
+      <div class="carousel-area">
+        <swiper
+          :modules="modules"
+          effect="fade"
+          :autoplay="{ delay: 4000, disableOnInteraction: false }"
+          :speed="1000"
+          :loop="true"
+          :pagination="{ clickable: true }"
+          class="login-carousel"
+        >
+          <swiper-slide v-for="(img, i) in carouselImages" :key="i">
+            <img :src="img" class="carousel-img" />
+          </swiper-slide>
+        </swiper>
       </div>
-      <div class="card-area">
-        <div class="glass-card">
+
+      <!-- Right: Login Card -->
+      <div class="login-area">
+        <div class="login-card">
+          <img src="@/assets/logo.png" alt="SIJIA TEX" class="card-logo" />
           <h2 class="card-title">登录</h2>
 
           <div class="field">
@@ -58,6 +74,21 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
+import 'swiper/css/pagination'
+
+// 轮播图列表
+import img1 from '@/assets/loginCarousel/wallhaven-9d17m1_2560x1440.png'
+import img2 from '@/assets/loginCarousel/wallhaven-d6o77l_3840x2160.png'
+import img3 from '@/assets/loginCarousel/wallhaven-jxp7x5_2560x1440.png'
+import img4 from '@/assets/loginCarousel/wallhaven-l8qw7y_2560x1440.png'
+import img5 from '@/assets/loginCarousel/wallhaven-o5j7v7_1920x1080.png'
+import img6 from '@/assets/loginCarousel/wallhaven-o5qwl7_2560x1440.png'
+import img7 from '@/assets/loginCarousel/wallhaven-rdvxxj_2560x1440.png'
+import img8 from '@/assets/loginCarousel/wallhaven-rr85dm_2560x1440.png'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { loginApi } from '@/api/auth'
@@ -69,6 +100,8 @@ const userName = ref('')
 const passWord = ref('')
 const loading = ref(false)
 const usernameInputRef = ref(null)
+const modules = [Autoplay, EffectFade, Pagination]
+const carouselImages = [img1, img2, img3, img4, img5, img6, img7, img8]
 
 onMounted(() => {
   usernameInputRef.value?.focus()
@@ -210,43 +243,69 @@ async function handleLogin() {
   z-index: 2;
   display: flex;
   height: 100%;
-  align-items: center;
 }
 
-.brand-area {
-  flex: 55;
+/* ====== Left: Carousel Area ====== */
+.carousel-area {
+  flex: 7;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Swiper pagination overrides */
+.login-carousel :deep(.swiper-pagination) {
+  bottom: 24px !important;
+}
+
+.login-carousel :deep(.swiper-pagination-bullet) {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.login-carousel :deep(.swiper-pagination-bullet-active) {
+  background: #fff;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ====== Right: Login Area ====== */
+.login-area {
+  flex: 3;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logo {
-  width: 180px;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
-}
-
-.card-area {
-  flex: 45;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-right: 48px;
-}
-
-/* ====== Glass Card ====== */
-.glass-card {
+.login-card {
   width: 340px;
   padding: 40px 36px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: #fff;
   border-radius: 20px;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.06),
     0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.card-logo {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: 0 auto 24px;
+  object-fit: contain;
 }
 
 .card-title {
