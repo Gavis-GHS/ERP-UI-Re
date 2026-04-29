@@ -1,32 +1,38 @@
 <template>
-  <app-sidebar
-    :items="menuItems"
-    :active-key="activeMenu"
-    :collapsed="isSidebarCollapsed"
-    @menu-click="handleMenuClick"
-    @toggle-collapse="isSidebarCollapsed = !isSidebarCollapsed"
-  />
-  <div class="right-container">
-    <AppTopNav
-      :logo="logo"
-      :nav-items="navItems"
-      :user-name="userName"
-    />
-    <div class="main-content">
-      <AppTabBar
-        :opened-tabs="openedTabs"
-        @tab-close="handleTabClose"
-      />
-      <router-view />
-    </div>
+  <div v-if="!isLoggedIn" class="login-layout">
+    <router-view />
   </div>
+  <template v-else>
+    <app-sidebar
+      :items="menuItems"
+      :active-key="activeMenu"
+      :collapsed="isSidebarCollapsed"
+      @menu-click="handleMenuClick"
+      @toggle-collapse="isSidebarCollapsed = !isSidebarCollapsed"
+    />
+    <div class="right-container">
+      <AppTopNav
+        :logo="logo"
+        :nav-items="navItems"
+        :user-name="currentUserName"
+      />
+      <div class="main-content">
+        <AppTabBar
+          :opened-tabs="openedTabs"
+          @tab-close="handleTabClose"
+        />
+        <router-view />
+      </div>
+    </div>
+  </template>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { MenuData } from '@/data/menu'
 import { TopNavData } from '@/data/topnav'
+import { isLoggedIn, userInfo } from '@/store/auth'
 import AppSidebar from '@/components/AppSidebar.vue'
 import AppTopNav from '@/components/AppTopNav.vue'
 import AppTabBar from '@/components/AppTabBar.vue'
@@ -38,7 +44,7 @@ const menuItems = ref(MenuData.items)
 const activeMenu = ref('/home')
 const navItems = ref([])
 const logo = ref(TopNavData.logo)
-const userName = ref(TopNavData.userName)
+const currentUserName = computed(() => userInfo.value?.userName || '')
 const isSidebarCollapsed = ref(true)
 const openedTabs = ref([
   { path: '/home', label: '首页', closable: false }
