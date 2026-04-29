@@ -72,6 +72,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Copyright -->
+    <div class="copyright">© 2026 思嘉供应商平台 版权所有</div>
   </div>
 </template>
 
@@ -415,5 +418,17 @@ async function handleLogin() {
 
 .btn-loading {
   opacity: 0.8;
+}
+
+/* ====== Copyright ====== */
+.copyright {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  text-align: center;
+  font-size: 12px;
+  color: #aeaeb2;
 }
 </style>
