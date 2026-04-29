@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" :class="{ collapsed }">
     <!-- Full-width mode -->
-    <div v-show="!collapsed" class="sidebar-full">
+    <div class="sidebar-full" :class="{ hidden: collapsed }">
       <div class="sidebar-toggle-top" @click="emit('toggle-collapse')">
         <span v-html="Icons.collapse" class="toggle-icon-svg"></span>
         <img :src="logoImg" class="sidebar-logo" />
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Minimal mode: icon list + teleported popups -->
-    <div v-show="collapsed" class="sidebar-minimal">
+    <div class="sidebar-minimal" :class="{ visible: collapsed }">
       <div class="sidebar-icons">
         <!-- Expand toggle -->
         <div class="icon-item toggle-icon-item" @click="emit('toggle-collapse')">
@@ -209,6 +209,13 @@ function isItemActive(item) {
   height: 100%;
   display: flex;
   flex-direction: column;
+  opacity: 1;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-full.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .menu-wrapper {
@@ -228,6 +235,14 @@ function isItemActive(item) {
   top: 0;
   width: 60px;
   height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-minimal.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Icon list */
