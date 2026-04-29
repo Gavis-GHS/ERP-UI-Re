@@ -208,6 +208,7 @@ function isItemActive(item) {
   display: flex;
   flex-direction: column;
   z-index: 2;
+  background-color: #1e293b;
   opacity: 1;
   transition: opacity 0.3s ease;
 }
